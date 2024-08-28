@@ -1,7 +1,7 @@
 # Use the official Alpine Linux image
 FROM alpine:latest
 
-# Install Apache and PHP with necessary extensions
+# Install Apache, PHP, and necessary extensions
 RUN apk update && apk add --no-cache \
     apache2 \
     apache2-utils \
@@ -27,11 +27,12 @@ RUN apk update && apk add --no-cache \
     php8-memcached \
     php8-memcache
 
-# Copy custom configuration files if needed
-# COPY ./my-httpd.conf /etc/apache2/httpd.con
+# Copy Apache and PHP configuration files if needed
+# COPY ./my-httpd.conf /etc/apache2/httpd.conf
+# COPY ./php-fpm.conf /etc/php8/php-fpm.conf
 
 # Expose port 80
 EXPOSE 80
 
-# Start Apache in the foreground
-CMD ["httpd", "-D", "FOREGROUND"]
+# Start both Apache and PHP-FPM services
+CMD ["sh", "-c", "httpd -D FOREGROUND & php-fpm8 -F"]
