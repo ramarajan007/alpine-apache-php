@@ -2,7 +2,6 @@ FROM alpine:3.15.11
 
 # Update the package index and install necessary packages
 RUN apk update && \
-    apk add --no-cache && \
     apk add apache2 \
     apache2-utils \
     php8 \
