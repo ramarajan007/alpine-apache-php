@@ -2,7 +2,8 @@ FROM alpine:3.15.11
 
 # Update the package index and install necessary packages
 RUN apk update && \
-    apk add apache2 \
+    apk add --no-cache \
+    apache2 \
     apache2-utils \
     php8 \
     php8-apache2 \
@@ -18,10 +19,10 @@ RUN apk update && \
     php8-bcmath \
     php8-bz2 \
     php8-intl \
-    php8-zip 
-    #php8-imagick \
-    #php8-memcached \
-    #php8-memcache
+    php8-zip
+    # php8-imagick \
+    # php8-memcached \
+    # php8-memcache
 
 # Expose port 80
 EXPOSE 80
